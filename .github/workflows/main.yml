@@ -14,4 +14,3 @@ jobs:
         server: rtmkrlv.ftp.tools
         username: rtmkrlv_github
         password: ${{ secrets.ftp_password }}
-        dry-run: true
