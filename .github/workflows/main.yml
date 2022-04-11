@@ -23,6 +23,7 @@ jobs:
           password: ${{ secrets.REMOTE_PASSWORD }}
           port: 22
           script: |
+            echo steps.ip.outputs.ipv4
             whoami
             ls -al
       - name: Remove ip from whitelists
