@@ -15,15 +15,16 @@ jobs:
         run: |
           curl -H "Content-Type: application/json" -H "Authorization: Bearer ${{ secrets.ADM_TOOLS_TOKEN }}" --request POST --data '{"account_id": "${{ secrets.ADM_TOOLS_ACCOUNT_ID }}", "ip": "${{ steps.ip.outputs.ipv4 }}"}' https://adm.tools/action/hosting/account/ssh/ip/send/
       - uses: actions/checkout@v1
-      - name: multiple command
-        uses: appleboy/ssh-action@master
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@5.2
         with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.REMOTE_PASSWORD }}
-          port: 22
-          script: |
-            RSYNC_PASSWORD='${{ secrets.REMOTE_PASSWORD }}'; rsync -avz --delete . ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_PATH }}
+          switches: -avzr --delete
+          path: .
+          remote_path: ${{ secrets.REMOTE_PATH }}
+          remote_host: ${{ secrets.REMOTE_HOST }}
+          remote_port: ${{ secrets.REMOTE_PORT }}
+          remote_user: ${{ secrets.REMOTE_USER }}
+          remote_key: ${{ secrets.REMOTE_KEY }}
       - name: Remove ip from whitelists
         id: removeip
         run: |
