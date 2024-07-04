@@ -13,7 +13,7 @@ jobs:
     - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@v3.1.2-patch
       with:
-        server: ${{ secrets.REMOTE_HOST }}
+        ftp-server: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASSWORD }}
         server-dir: ${{ secrets.FTP_PATH }}
