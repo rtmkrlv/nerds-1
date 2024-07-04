@@ -16,4 +16,4 @@ jobs:
         ftp-server: ${{ secrets.REMOTE_HOST }}
         ftp-username: ${{ secrets.FTP_USER }}
         ftp-password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ${{ secrets.FTP_PATH }}
+        entryPoint: ${{ secrets.FTP_PATH }}
